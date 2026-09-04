@@ -1,7 +1,7 @@
 "use client";
 
 import { Edit, useForm } from "@refinedev/antd";
-import { Input, InputNumber, Select } from "antd";
+import { Form, Input, InputNumber } from "antd";
 
 export default function ProductsEdit() {
   const { formProps, saveButtonProps } = useForm({
@@ -10,56 +10,35 @@ export default function ProductsEdit() {
 
   return (
     <Edit saveButtonProps={saveButtonProps} title="ویرایش محصول">
-      <form {...formProps}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-          <div>
-            <label>نام محصول:</label>
-            <Input name="name" {...formProps.form?.getFieldProps("name")} />
-          </div>
-          
-          <div>
-            <label>قیمت (تومان):</label>
-            <InputNumber 
-              name="price_toman" 
-              {...formProps.form?.getFieldProps("price_toman")}
-              style={{ width: "100%" }}
-            />
-          </div>
+      <Form {...formProps} layout="vertical">
+        <Form.Item label="نام محصول:" name="name" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        
+        <Form.Item label="قیمت (تومان):" name="price_toman">
+          <InputNumber style={{ width: "100%" }} />
+        </Form.Item>
 
-          <div>
-            <label>برند:</label>
-            <Input name="brand" {...formProps.form?.getFieldProps("brand")} />
-          </div>
+        <Form.Item label="برند:" name="brand">
+          <Input />
+        </Form.Item>
 
-          <div>
-            <label>موجودی:</label>
-            <InputNumber 
-              name="stock" 
-              {...formProps.form?.getFieldProps("stock")}
-              style={{ width: "100%" }}
-            />
-          </div>
+        <Form.Item label="موجودی:" name="stock">
+          <InputNumber style={{ width: "100%" }} />
+        </Form.Item>
 
-          <div>
-            <label>تصویر (URL):</label>
-            <Input name="image" {...formProps.form?.getFieldProps("image")} />
-          </div>
+        <Form.Item label="تصویر (URL):" name="image">
+          <Input />
+        </Form.Item>
 
-          <div>
-            <label>دسته‌بندی:</label>
-            <Input name="category" {...formProps.form?.getFieldProps("category")} />
-          </div>
+        <Form.Item label="دسته‌بندی:" name="category">
+          <Input />
+        </Form.Item>
 
-          <div>
-            <label>توضیحات:</label>
-            <Input.TextArea 
-              name="description" 
-              {...formProps.form?.getFieldProps("description")}
-              rows={4}
-            />
-          </div>
-        </div>
-      </form>
+        <Form.Item label="توضیحات:" name="description">
+          <Input.TextArea rows={4} />
+        </Form.Item>
+      </Form>
     </Edit>
   );
 }
