@@ -6,50 +6,49 @@ import { Authenticated } from "@refinedev/core";
 import { useRouter } from "next/navigation";
 
 export default function ProductsEdit() {
+  const router = useRouter();
   const { formProps, saveButtonProps } = useForm({
     resource: "products",
   });
-  const router = useRouter();
 
   return (
     <Authenticated
       key="products-edit"
-      fallback={() => {
-        router.push("/login");
-        return <div>در حال انتقال به صفحه ورود...</div>;
-      }}
+      fallback={<div>در حال انتقال به صفحه ورود...</div>}
     >
-      <Edit saveButtonProps={saveButtonProps} title="ویرایش محصول">
-        <Form {...formProps} layout="vertical">
-          <Form.Item label="نام محصول:" name="name" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          
-          <Form.Item label="قیمت (تومان):" name="price_toman">
-            <InputNumber style={{ width: "100%" }} />
-          </Form.Item>
+      {() => (
+        <Edit saveButtonProps={saveButtonProps} title="ویرایش محصول">
+          <Form {...formProps} layout="vertical">
+            <Form.Item label="نام محصول:" name="name" rules={[{ required: true }]}>
+              <Input />
+            </Form.Item>
 
-          <Form.Item label="برند:" name="brand">
-            <Input />
-          </Form.Item>
+            <Form.Item label="قیمت (تومان):" name="price_toman">
+              <InputNumber style={{ width: "100%" }} />
+            </Form.Item>
 
-          <Form.Item label="موجودی:" name="stock">
-            <InputNumber style={{ width: "100%" }} />
-          </Form.Item>
+            <Form.Item label="برند:" name="brand">
+              <Input />
+            </Form.Item>
 
-          <Form.Item label="تصویر (URL):" name="image">
-            <Input />
-          </Form.Item>
+            <Form.Item label="موجودی:" name="stock">
+              <InputNumber style={{ width: "100%" }} />
+            </Form.Item>
 
-          <Form.Item label="دسته‌بندی:" name="category">
-            <Input />
-          </Form.Item>
+            <Form.Item label="تصویر (URL):" name="image">
+              <Input />
+            </Form.Item>
 
-          <Form.Item label="توضیحات:" name="description">
-            <Input.TextArea rows={4} />
-          </Form.Item>
-        </Form>
-      </Edit>
+            <Form.Item label="دسته‌بندی:" name="category">
+              <Input />
+            </Form.Item>
+
+            <Form.Item label="توضیحات:" name="description">
+              <Input.TextArea rows={4} />
+            </Form.Item>
+          </Form>
+        </Edit>
+      )}
     </Authenticated>
   );
 }

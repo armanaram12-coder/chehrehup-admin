@@ -6,44 +6,43 @@ import { Authenticated } from "@refinedev/core";
 import { useRouter } from "next/navigation";
 
 export default function SupportMessagesEdit() {
+  const router = useRouter();
   const { formProps, saveButtonProps } = useForm({
     resource: "support_messages",
   });
-  const router = useRouter();
 
   return (
     <Authenticated
       key="support-messages-edit"
-      fallback={() => {
-        router.push("/login");
-        return <div>در حال انتقال به صفحه ورود...</div>;
-      }}
+      fallback={<div>در حال انتقال به صفحه ورود...</div>}
     >
-      <Edit saveButtonProps={saveButtonProps} title="پاسخ به تیکت">
-        <Form {...formProps} layout="vertical">
-          <Form.Item label="موضوع:" name="subject">
-            <Input disabled />
-          </Form.Item>
+      {() => (
+        <Edit saveButtonProps={saveButtonProps} title="پاسخ به تیکت">
+          <Form {...formProps} layout="vertical">
+            <Form.Item label="موضوع:" name="subject">
+              <Input disabled />
+            </Form.Item>
 
-          <Form.Item label="پیام کاربر:" name="message">
-            <Input.TextArea disabled rows={4} />
-          </Form.Item>
+            <Form.Item label="پیام کاربر:" name="message">
+              <Input.TextArea disabled rows={4} />
+            </Form.Item>
 
-          <Form.Item label="وضعیت:" name="status">
-            <Select
-              options={[
-                { value: "open", label: "باز" },
-                { value: "in_progress", label: "در حال بررسی" },
-                { value: "closed", label: "بسته شده" },
-              ]}
-            />
-          </Form.Item>
+            <Form.Item label="وضعیت:" name="status">
+              <Select
+                options={[
+                  { value: "open", label: "باز" },
+                  { value: "in_progress", label: "در حال بررسی" },
+                  { value: "closed", label: "بسته شده" },
+                ]}
+              />
+            </Form.Item>
 
-          <Form.Item label="پاسخ ادمین:" name="admin_reply">
-            <Input.TextArea rows={5} placeholder="پاسخ خود را اینجا بنویسید..." />
-          </Form.Item>
-        </Form>
-      </Edit>
+            <Form.Item label="پاسخ ادمین:" name="admin_reply">
+              <Input.TextArea rows={5} placeholder="پاسخ خود را اینجا بنویسید..." />
+            </Form.Item>
+          </Form>
+        </Edit>
+      )}
     </Authenticated>
   );
 }

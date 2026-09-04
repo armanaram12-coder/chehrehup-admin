@@ -3,20 +3,12 @@
 import { List, useTable, EditButton, ShowButton } from "@refinedev/antd";
 import { Table, Space, Tag } from "antd";
 import { Authenticated } from "@refinedev/core";
-import { useRouter } from "next/navigation";
 
 export default function OrdersList() {
   const { tableProps } = useTable({ resource: "orders" });
-  const router = useRouter();
 
   return (
-    <Authenticated
-      key="orders-list"
-      fallback={() => {
-        router.push("/login");
-        return <div>در حال انتقال به صفحه ورود...</div>;
-      }}
-    >
+    <Authenticated fallback={<div>در حال انتقال به صفحه ورود...</div>}>
       <List title="مدیریت سفارشات">
         <Table {...tableProps} rowKey="id">
           <Table.Column dataIndex="id" title="شماره سفارش" width={80} />
