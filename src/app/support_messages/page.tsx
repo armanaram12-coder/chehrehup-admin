@@ -1,12 +1,10 @@
 "use client";
 
-import { List, useTable, Edit, Show } from "@refinedev/antd";
+import { List, useTable, EditButton, ShowButton } from "@refinedev/antd";
 import { Table, Space, Tag } from "antd";
 
 export default function SupportMessagesList() {
-  const { tableProps } = useTable({
-    resource: "support_messages",
-  });
+  const { tableProps } = useTable({ resource: "support_messages" });
 
   return (
     <List title="تیکت‌های پشتیبانی">
@@ -18,11 +16,7 @@ export default function SupportMessagesList() {
           dataIndex="status"
           title="وضعیت"
           render={(value: string) => {
-            const colors: any = {
-              open: "green",
-              in_progress: "blue",
-              closed: "gray",
-            };
+            const colors: any = { open: "green", in_progress: "blue", closed: "gray" };
             return <Tag color={colors[value] || "default"}>{value}</Tag>;
           }}
         />
@@ -35,8 +29,8 @@ export default function SupportMessagesList() {
           title="عملیات"
           render={(_, record: any) => (
             <Space>
-              <Edit size="small" recordItemId={record.id} />
-              <Show size="small" recordItemId={record.id} />
+              <EditButton size="small" recordItemId={record.id} />
+              <ShowButton size="small" recordItemId={record.id} />
             </Space>
           )}
         />
