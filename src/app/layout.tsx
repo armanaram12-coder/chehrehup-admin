@@ -44,22 +44,17 @@ export default async function RootLayout({
                     notificationProvider={useNotificationProvider}
                     resources={[
                       {
-                        name: "users",
-                        list: "/users",
-                        meta: { label: "کاربران", icon: <UserOutlined /> },
+                        name: "products",
+                        list: "/products",
+                        create: "/products/create",
+                        edit: "/products/edit/:id",
+                        meta: { label: "محصولات", icon: <ProductOutlined /> },
                       },
                       {
                         name: "orders",
                         list: "/orders",
                         edit: "/orders/edit/:id",
                         meta: { label: "سفارشات", icon: <ShoppingCartOutlined /> },
-                      },
-                      {
-                        name: "products",
-                        list: "/products",
-                        create: "/products/create",
-                        edit: "/products/edit/:id",
-                        meta: { label: "محصولات", icon: <ProductOutlined /> },
                       },
                       {
                         name: "support_messages",
@@ -71,6 +66,11 @@ export default async function RootLayout({
                         name: "newsletter_subscribers",
                         list: "/newsletter",
                         meta: { label: "خبرنامه", icon: <MailOutlined /> },
+                      },
+                      {
+                        name: "user_profiles",
+                        list: "/user_profiles",
+                        meta: { label: "پروفایل کاربران", icon: <UserOutlined /> },
                       },
                     ]}
                     options={{
