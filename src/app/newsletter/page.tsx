@@ -3,22 +3,14 @@
 import { List, useTable } from "@refinedev/antd";
 import { Table, Tag } from "antd";
 import { Authenticated } from "@refinedev/core";
-import { useRouter } from "next/navigation";
 
 export default function NewsletterList() {
   const { tableProps } = useTable({
     resource: "newsletter_subscribers",
   });
-  const router = useRouter();
-
+  
   return (
-    <Authenticated
-      key="newsletter-list"
-      fallback={() => {
-        router.push("/login");
-        return <div>در حال انتقال به صفحه ورود...</div>;
-      }}
-    >
+    <Authenticated key="newsletter-list">
       <List title="مشترکین خبرنامه">
         <Table {...tableProps} rowKey="id">
           <Table.Column dataIndex="id" title="شماره" width={80} />

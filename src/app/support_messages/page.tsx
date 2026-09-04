@@ -3,20 +3,12 @@
 import { List, useTable, EditButton, ShowButton } from "@refinedev/antd";
 import { Table, Space, Tag } from "antd";
 import { Authenticated } from "@refinedev/core";
-import { useRouter } from "next/navigation";
 
 export default function SupportMessagesList() {
   const { tableProps } = useTable({ resource: "support_messages" });
-  const router = useRouter();
-
+  
   return (
-    <Authenticated
-      key="support-messages-list"
-      fallback={() => {
-        router.push("/login");
-        return <div>در حال انتقال به صفحه ورود...</div>;
-      }}
-    >
+    <Authenticated key="support-messages-list">
       <List title="تیکت‌های پشتیبانی">
         <Table {...tableProps} rowKey="id">
           <Table.Column dataIndex="id" title="شماره تیکت" width={80} />

@@ -3,22 +3,14 @@
 import { Create, useForm } from "@refinedev/antd";
 import { Form, Input, InputNumber } from "antd";
 import { Authenticated } from "@refinedev/core";
-import { useRouter } from "next/navigation";
 
 export default function ProductsCreate() {
   const { formProps, saveButtonProps } = useForm({
     resource: "products",
   });
-  const router = useRouter();
-
+  
   return (
-    <Authenticated
-      key="products-create"
-      fallback={() => {
-        router.push("/login");
-        return <div>در حال انتقال به صفحه ورود...</div>;
-      }}
-    >
+    <Authenticated key="products-create">
       <Create saveButtonProps={saveButtonProps} title="افزودن محصول جدید">
         <Form {...formProps} layout="vertical">
           <Form.Item label="نام محصول:" name="name" rules={[{ required: true }]}>
