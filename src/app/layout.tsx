@@ -2,14 +2,14 @@ import { Metadata } from "next";
 import { cookies } from "next/headers";
 import React, { Suspense } from "react";
 import { Refine } from "@refinedev/core";
-import { DevtoolsProvider } from "@providers/devtools";
+import { DevtoolsProvider } from "@/providers/devtools";
 import { useNotificationProvider } from "@refinedev/antd";
 import routerProvider from "@refinedev/nextjs-router";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "@refinedev/antd/dist/reset.css";
-import { authProviderClient } from "../providers/auth-provider";
-import { dataProvider } from "../providers/data-provider";
-import { ColorModeContextProvider } from "../contexts/color-mode";
+import { authProvider } from "@/providers/auth-provider";
+import { dataProvider } from "@/providers/data-provider";
+import { ColorModeContextProvider } from "@/contexts/color-mode";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import { UserOutlined, ShoppingCartOutlined, ProductOutlined, MessageOutlined, MailOutlined } from "@ant-design/icons";
 
@@ -37,8 +37,8 @@ export default function RootLayout({
                 <DevtoolsProvider>
                   <Refine
                     routerProvider={routerProvider}
-                    dataProvider={dataProvider()}
-                    authProvider={authProviderClient}
+                    dataProvider={dataProvider}
+                    authProvider={authProvider}
                     notificationProvider={useNotificationProvider}
                     resources={[
                       {
