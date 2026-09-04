@@ -1,6 +1,6 @@
 "use client";
 
-import { List, useTable } from "@refinedev/antd";
+import { List, useTable, EditButton } from "@refinedev/antd";
 import { Table, Tag } from "antd";
 import { Authenticated } from "@refinedev/core";
 import { useRouter } from "next/navigation";
@@ -38,6 +38,13 @@ export default function UserProfilesList() {
             dataIndex="created_at"
             title="تاریخ ثبت‌نام"
             render={(value: string) => new Date(value).toLocaleDateString("fa-IR")}
+          />
+          <Table.Column
+            title="عملیات"
+            fixed="right"
+            render={(_, record: any) => (
+              <EditButton size="small" recordItemId={record.id} />
+            )}
           />
         </Table>
       </List>

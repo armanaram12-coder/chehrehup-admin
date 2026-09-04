@@ -51,7 +51,23 @@ export async function updateSession(request: NextRequest) {
     },
   });
 
-  await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  // لیست مسیرهای عمومی که نیاز به لاگین ندارند
+  const publicPaths = ["/login", "/register", "/forgot-password"];
+  const isPublicPath = publicPaths.some(path => request.nextUrl.pathname.startsWith(path));
+
+  // اگر کاربر لاگین نکرده و مسیر عمومی نیست، به صفحه لاگین ریدایرکت کن
+  if (!user && !isPublicPath) {
+    const loginUrl = new URL("/login", request.url);
+    loginUrl.searchParams.set("redirectTo", request.nextUrl.pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  // اگر کاربر لاگین کرده و سعی دارد به صفحه لاگین برود، به صفحه اصلی بفرست
+  if (user && isPublicPath) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
 
   return response;
 }
