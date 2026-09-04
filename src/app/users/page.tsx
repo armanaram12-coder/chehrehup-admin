@@ -1,46 +1,31 @@
 "use client";
 
-import { List, useTable } from "@refinedev/antd";
-import { Table, Space, Edit, Delete, Show } from "antd";
-import { useDelete, useNavigation } from "@refinedev/core";
+import { List, useTable, Show } from "@refinedev/antd";
+import { Table, Space, Tag } from "antd";
 
 export default function UsersList() {
   const { tableProps } = useTable({
     resource: "users",
   });
 
-  const { edit, show } = useNavigation();
-  const { mutate: deleteMutation } = useDelete();
-
-  const handleDelete = (id: string) => {
-    deleteMutation({
-      resource: "users",
-      id,
-    });
-  };
-
   return (
     <List title="مدیریت کاربران">
       <Table {...tableProps} rowKey="id">
-        <Table.Column dataIndex="id" title="ID" />
+        <Table.Column dataIndex="id" title="ID" width={100} />
         <Table.Column dataIndex="email" title="ایمیل" />
-        <Table.Column dataIndex="role" title="نقش" />
+        <Table.Column dataIndex="role" title="نقش" render={(value: string) => (
+          <Tag color={value === "admin" ? "red" : "blue"}>{value}</Tag>
+        )} />
+        <Table.Column
+          dataIndex="created_at"
+          title="تاریخ ثبت‌نام"
+          render={(value: string) => new Date(value).toLocaleDateString("fa-IR")}
+        />
         <Table.Column
           title="عملیات"
           render={(_, record: any) => (
             <Space>
-              <Edit
-                size="small"
-                onClick={() => edit("users", record.id)}
-              />
-              <Show
-                size="small"
-                onClick={() => show("users", record.id)}
-              />
-              <Delete
-                size="small"
-                onClick={() => handleDelete(record.id)}
-              />
+              <Show size="small" recordItemId={record.id} />
             </Space>
           )}
         />
