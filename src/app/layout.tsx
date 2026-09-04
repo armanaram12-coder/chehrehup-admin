@@ -7,18 +7,15 @@ import { useNotificationProvider } from "@refinedev/antd";
 import routerProvider from "@refinedev/nextjs-router";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "@refinedev/antd/dist/reset.css";
-import { authProviderClient } from "@providers/auth-provider/auth-provider";
-import { dataProvider } from "@providers/data-provider";
-import { ColorModeContextProvider } from "@contexts/color-mode";
+import { authProviderClient } from "../providers/auth-provider";
+import { dataProvider } from "../providers/data-provider";
+import { ColorModeContextProvider } from "../contexts/color-mode";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import { UserOutlined, ShoppingCartOutlined, ProductOutlined, MessageOutlined, MailOutlined } from "@ant-design/icons";
 
 export const metadata: Metadata = {
   title: "پنل مدیریت چهره آپ",
   description: "پنل مدیریت فروشگاه چهره آپ",
-  icons: {
-    icon: "/icon.ico",
-  },
 };
 
 export default function RootLayout({
