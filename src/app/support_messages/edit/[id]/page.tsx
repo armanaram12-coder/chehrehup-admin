@@ -3,22 +3,14 @@
 import { Edit, useForm } from "@refinedev/antd";
 import { Form, Input, Select } from "antd";
 import { Authenticated } from "@refinedev/core";
-import { useRouter } from "next/navigation";
 
 export default function SupportMessagesEdit() {
   const { formProps, saveButtonProps } = useForm({
     resource: "support_messages",
   });
-  const router = useRouter();
-
+  
   return (
-    <Authenticated
-      key="support-messages-edit"
-      fallback={() => {
-        router.push("/login");
-        return <div>در حال انتقال به صفحه ورود...</div>;
-      }}
-    >
+    <Authenticated key="support-messages-edit">
       <Edit saveButtonProps={saveButtonProps} title="پاسخ به تیکت">
         <Form {...formProps} layout="vertical">
           <Form.Item label="موضوع:" name="subject">

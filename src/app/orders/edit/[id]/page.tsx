@@ -3,22 +3,14 @@
 import { Edit, useForm } from "@refinedev/antd";
 import { Form, Input, Select } from "antd";
 import { Authenticated } from "@refinedev/core";
-import { useRouter } from "next/navigation";
 
 export default function OrdersEdit() {
   const { formProps, saveButtonProps } = useForm({
     resource: "orders",
   });
-  const router = useRouter();
-
+  
   return (
-    <Authenticated
-      key="orders-edit"
-      fallback={() => {
-        router.push("/login");
-        return <div>در حال انتقال به صفحه ورود...</div>;
-      }}
-    >
+    <Authenticated key="orders-edit">
       <Edit saveButtonProps={saveButtonProps} title="ویرایش سفارش">
         <Form {...formProps} layout="vertical">
           <Form.Item label="ایمیل مشتری:" name="user_email">
