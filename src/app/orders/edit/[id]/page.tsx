@@ -1,7 +1,7 @@
 "use client";
 
 import { Edit, useForm } from "@refinedev/antd";
-import { Input, Select } from "antd";
+import { Form, Input, Select } from "antd";
 
 export default function OrdersEdit() {
   const { formProps, saveButtonProps } = useForm({
@@ -10,47 +10,31 @@ export default function OrdersEdit() {
 
   return (
     <Edit saveButtonProps={saveButtonProps} title="ویرایش سفارش">
-      <form {...formProps}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-          <div>
-            <label>ایمیل مشتری:</label>
-            <Input name="user_email" {...formProps.form?.getFieldProps("user_email")} disabled />
-          </div>
+      <Form {...formProps} layout="vertical">
+        <Form.Item label="ایمیل مشتری:" name="user_email">
+          <Input disabled />
+        </Form.Item>
 
-          <div>
-            <label>وضعیت:</label>
-            <Select
-              {...formProps.form?.getFieldProps("status")}
-              style={{ width: "100%" }}
-              options={[
-                { value: "pending", label: "در انتظار پرداخت" },
-                { value: "processing", label: "در حال پردازش" },
-                { value: "shipped", label: "ارسال شده" },
-                { value: "delivered", label: "تحویل داده شده" },
-                { value: "cancelled", label: "لغو شده" },
-              ]}
-            />
-          </div>
+        <Form.Item label="وضعیت:" name="status">
+          <Select
+            options={[
+              { value: "pending", label: "در انتظار پرداخت" },
+              { value: "processing", label: "در حال پردازش" },
+              { value: "shipped", label: "ارسال شده" },
+              { value: "delivered", label: "تحویل داده شده" },
+              { value: "cancelled", label: "لغو شده" },
+            ]}
+          />
+        </Form.Item>
 
-          <div>
-            <label>آدرس ارسال:</label>
-            <Input.TextArea 
-              name="shipping_address" 
-              {...formProps.form?.getFieldProps("shipping_address")}
-              rows={3}
-            />
-          </div>
+        <Form.Item label="آدرس ارسال:" name="shipping_address">
+          <Input.TextArea rows={3} />
+        </Form.Item>
 
-          <div>
-            <label>توضیحات:</label>
-            <Input.TextArea 
-              name="notes" 
-              {...formProps.form?.getFieldProps("notes")}
-              rows={3}
-            />
-          </div>
-        </div>
-      </form>
+        <Form.Item label="توضیحات:" name="notes">
+          <Input.TextArea rows={3} />
+        </Form.Item>
+      </Form>
     </Edit>
   );
 }
