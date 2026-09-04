@@ -1,12 +1,10 @@
 "use client";
 
-import { List, useTable, Edit, Delete, Show } from "@refinedev/antd";
-import { Table, Space, Image, Tag } from "antd";
+import { List, useTable, EditButton, ShowButton, DeleteButton } from "@refinedev/antd";
+import { Table, Space, Image } from "antd";
 
 export default function ProductsList() {
-  const { tableProps } = useTable({
-    resource: "products",
-  });
+  const { tableProps } = useTable({ resource: "products" });
 
   return (
     <List title="مدیریت محصولات">
@@ -33,9 +31,9 @@ export default function ProductsList() {
           fixed="right"
           render={(_, record: any) => (
             <Space>
-              <Edit size="small" recordItemId={record.id} />
-              <Show size="small" recordItemId={record.id} />
-              <Delete size="small" recordItemId={record.id} />
+              <EditButton size="small" recordItemId={record.id} />
+              <ShowButton size="small" recordItemId={record.id} />
+              <DeleteButton size="small" recordItemId={record.id} />
             </Space>
           )}
         />
