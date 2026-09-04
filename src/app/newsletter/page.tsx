@@ -1,7 +1,7 @@
 "use client";
 
-import { List, useTable, Delete } from "@refinedev/antd";
-import { Table, Space, Tag } from "antd";
+import { List, useTable } from "@refinedev/antd";
+import { Table, Tag } from "antd";
 
 export default function NewsletterList() {
   const { tableProps } = useTable({
@@ -26,14 +26,6 @@ export default function NewsletterList() {
           dataIndex="subscribed_at"
           title="تاریخ عضویت"
           render={(value: string) => new Date(value).toLocaleDateString("fa-IR")}
-        />
-        <Table.Column
-          title="عملیات"
-          render={(_, record: any) => (
-            <Space>
-              <Delete size="small" recordItemId={record.id} />
-            </Space>
-          )}
         />
       </Table>
     </List>
