@@ -18,12 +18,14 @@ export const metadata: Metadata = {
   description: "پنل مدیریت فروشگاه چهره آپ",
 };
 
-export default function RootLayout({
+// ۱. تابع رو async کردیم
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = cookies();
+  // ۲. قبل از cookies کلمه await رو اضافه کردیم
+  const cookieStore = await cookies();
   const theme = cookieStore.get("theme");
   const defaultMode = theme?.value === "dark" ? "dark" : "light";
 
