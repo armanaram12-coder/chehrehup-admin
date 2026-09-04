@@ -1,6 +1,11 @@
 "use client";
 
-import { dataProvider as dataProviderSupabase } from "@refinedev/supabase";
-import { supabaseBrowserClient } from "@utils/supabase/client";
+import { dataProvider as supabaseDataProvider } from "@refinedev/supabase";
+import { createClient } from "@supabase/supabase-js";
 
-export const dataProvider = dataProviderSupabase(supabaseBrowserClient);
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+export const supabaseClient = createClient(supabaseUrl, supabaseAnonKey);
+
+export const dataProvider = supabaseDataProvider(supabaseClient);
