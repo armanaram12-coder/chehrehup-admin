@@ -1,12 +1,10 @@
 "use client";
 
-import { List, useTable, Edit, Show } from "@refinedev/antd";
+import { List, useTable, EditButton, ShowButton } from "@refinedev/antd";
 import { Table, Space, Tag } from "antd";
 
 export default function OrdersList() {
-  const { tableProps } = useTable({
-    resource: "orders",
-  });
+  const { tableProps } = useTable({ resource: "orders" });
 
   return (
     <List title="مدیریت سفارشات">
@@ -22,13 +20,7 @@ export default function OrdersList() {
           dataIndex="status"
           title="وضعیت"
           render={(value: string) => {
-            const colors: any = {
-              pending: "orange",
-              processing: "blue",
-              shipped: "purple",
-              delivered: "green",
-              cancelled: "red",
-            };
+            const colors: any = { pending: "orange", processing: "blue", shipped: "purple", delivered: "green", cancelled: "red" };
             return <Tag color={colors[value] || "default"}>{value}</Tag>;
           }}
         />
@@ -41,8 +33,8 @@ export default function OrdersList() {
           title="عملیات"
           render={(_, record: any) => (
             <Space>
-              <Edit size="small" recordItemId={record.id} />
-              <Show size="small" recordItemId={record.id} />
+              <EditButton size="small" recordItemId={record.id} />
+              <ShowButton size="small" recordItemId={record.id} />
             </Space>
           )}
         />
