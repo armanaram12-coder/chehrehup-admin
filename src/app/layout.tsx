@@ -7,7 +7,7 @@ import { useNotificationProvider } from "@refinedev/antd";
 import routerProvider from "@refinedev/nextjs-router";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "@refinedev/antd/dist/reset.css";
-import { authProvider } from "@/providers/auth-provider";
+import { authProviderClient } from "@/providers/auth-provider/auth-provider.client";
 import { dataProvider } from "@/providers/data-provider";
 import { ColorModeContextProvider } from "@/contexts/color-mode";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
@@ -38,7 +38,7 @@ export default function RootLayout({
                   <Refine
                     routerProvider={routerProvider}
                     dataProvider={dataProvider}
-                    authProvider={authProvider}
+                    authProvider={authProviderClient}
                     notificationProvider={useNotificationProvider}
                     resources={[
                       {
