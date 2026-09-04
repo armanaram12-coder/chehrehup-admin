@@ -60,9 +60,9 @@ export default function RootLayout({
                         meta: { label: "محصولات", icon: <ProductOutlined /> },
                       },
                       {
-                        name: "support_tickets",
-                        list: "/tickets",
-                        edit: "/tickets/edit/:id",
+                        name: "support_messages",
+                        list: "/support_messages",
+                        edit: "/support_messages/edit/:id",
                         meta: { label: "تیکت‌ها", icon: <MessageOutlined /> },
                       },
                       {
