@@ -2,39 +2,54 @@
 
 import { Create, useForm } from "@refinedev/antd";
 import { Form, Input, InputNumber } from "antd";
+import { Authenticated } from "@refinedev/core";
+import { useRouter } from "next/navigation";
 
 export default function ProductsCreate() {
   const { formProps, saveButtonProps } = useForm({
     resource: "products",
   });
+  const router = useRouter();
 
   return (
-    <Create saveButtonProps={saveButtonProps} title="افزودن محصول جدید">
-      <Form {...formProps} layout="vertical">
-        <Form.Item label="نام محصول:" name="name" rules={[{ required: true }]}>
-          <Input />
-        </Form.Item>
-        
-        <Form.Item label="قیمت (تومان):" name="price_toman">
-          <InputNumber style={{ width: "100%" }} />
-        </Form.Item>
+    <Authenticated
+      key="products-create"
+      fallback={() => {
+        router.push("/login");
+        return <div>در حال انتقال به صفحه ورود...</div>;
+      }}
+    >
+      <Create saveButtonProps={saveButtonProps} title="افزودن محصول جدید">
+        <Form {...formProps} layout="vertical">
+          <Form.Item label="نام محصول:" name="name" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          
+          <Form.Item label="قیمت (تومان):" name="price_toman">
+            <InputNumber style={{ width: "100%" }} />
+          </Form.Item>
 
-        <Form.Item label="برند:" name="brand">
-          <Input />
-        </Form.Item>
+          <Form.Item label="برند:" name="brand">
+            <Input />
+          </Form.Item>
 
-        <Form.Item label="موجودی:" name="stock">
-          <InputNumber style={{ width: "100%" }} />
-        </Form.Item>
+          <Form.Item label="موجودی:" name="stock">
+            <InputNumber style={{ width: "100%" }} />
+          </Form.Item>
 
-        <Form.Item label="تصویر (URL):" name="image">
-          <Input />
-        </Form.Item>
+          <Form.Item label="تصویر (URL):" name="image">
+            <Input />
+          </Form.Item>
 
-        <Form.Item label="دسته‌بندی:" name="category">
-          <Input />
-        </Form.Item>
-      </Form>
-    </Create>
+          <Form.Item label="دسته‌بندی:" name="category">
+            <Input />
+          </Form.Item>
+
+          <Form.Item label="توضیحات:" name="description">
+            <Input.TextArea rows={4} />
+          </Form.Item>
+        </Form>
+      </Create>
+    </Authenticated>
   );
 }
