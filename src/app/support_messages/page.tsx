@@ -37,6 +37,7 @@ export default function SupportMessagesList() {
           />
           <Table.Column
             title="عملیات"
+            fixed="right"
             render={(_, record: any) => (
               <Space>
                 <EditButton size="small" recordItemId={record.id} />
