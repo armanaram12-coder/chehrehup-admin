@@ -35,10 +35,6 @@ export default function ProductsList() {
             } else {
               setFilters([]);
             }
-            const pagination = tableProps.pagination;
-            if (pagination && typeof pagination === 'object' && pagination.current && pagination.current !== 1) {
-              tableProps.onChange?.({ current: 1, pageSize: pagination.pageSize }, {}, {}, {});
-            }
           }}
         />
         <Table {...tableProps} rowKey="id" scroll={{ x: 800 }}>
