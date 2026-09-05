@@ -2,7 +2,7 @@
 
 import { ColorModeContext } from "@contexts/color-mode";
 import type { RefineThemedLayoutHeaderProps } from "@refinedev/antd";
-import { useGetIdentity } from "@refinedev/core";
+import { useGetIdentity, useLogout } from "@refinedev/core";
 import {
   Avatar,
   Layout as AntdLayout,
@@ -10,8 +10,10 @@ import {
   Switch,
   theme,
   Typography,
+  Button,
 } from "antd";
 import React, { useContext } from "react";
+import { LogoutOutlined } from "@ant-design/icons";
 
 const { Text } = Typography;
 const { useToken } = theme;
@@ -28,11 +30,12 @@ export const Header: React.FC<RefineThemedLayoutHeaderProps> = ({
   const { token } = useToken();
   const { data: user } = useGetIdentity<IUser>();
   const { mode, setMode } = useContext(ColorModeContext);
+  const { mutate: logout } = useLogout();
 
   const headerStyles: React.CSSProperties = {
     backgroundColor: token.colorBgElevated,
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
     alignItems: "center",
     padding: "0px 24px",
     height: "64px",
@@ -46,6 +49,16 @@ export const Header: React.FC<RefineThemedLayoutHeaderProps> = ({
 
   return (
     <AntdLayout.Header style={headerStyles}>
+      <Space>
+        <Button 
+          type="text" 
+          icon={<LogoutOutlined />} 
+          onClick={() => logout()}
+          danger
+        >
+          خروج
+        </Button>
+      </Space>
       <Space>
         <Switch
           checkedChildren="🌛"
