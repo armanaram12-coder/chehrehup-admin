@@ -1,22 +1,21 @@
 "use client";
-import { List, useTable, EditButton, ShowButton, DeleteButton, useFilterState } from "@refinedev/antd";
+import { List, useTable, EditButton, ShowButton, DeleteButton } from "@refinedev/antd";
 import { Table, Space, Image, Input } from "antd";
 import { Authenticated } from "@refinedev/core";
 import { useRouter } from "next/navigation";
 import { SearchOutlined } from "@ant-design/icons";
+import { useState } from "react";
 
 export default function ProductsList() {
   const router = useRouter();
-  const [filters, setFilters] = useFilterState();
-  const { tableProps } = useTable({
+  const [searchValue, setSearchValue] = useState("");
+  const { tableProps, setFilters } = useTable({
     resource: "products",
     filters: {
       initial: [{ field: "name", value: "", operator: "contains" }],
     },
   });
-
-  const searchValue = filters.find((f) => f.field === "name")?.value || "";
-
+  
   return (
     <Authenticated
       key="products-list"
@@ -29,11 +28,12 @@ export default function ProductsList() {
           style={{ marginBottom: 16, maxWidth: 300 }}
           value={searchValue}
           onChange={(e) => {
-            const newFilters = filters.filter((f) => f.field !== "name");
-            if (e.target.value) {
-              setFilters([...newFilters, { field: "name", value: e.target.value, operator: "contains" }]);
+            const value = e.target.value;
+            setSearchValue(value);
+            if (value) {
+              setFilters([{ field: "name", value, operator: "contains" }]);
             } else {
-              setFilters(newFilters);
+              setFilters([]);
             }
             if (tableProps.pagination?.current && tableProps.pagination.current !== 1) {
               tableProps.onChange?.({ current: 1, pageSize: tableProps.pagination.pageSize }, {}, {}, {});
