@@ -17,7 +17,7 @@ export default function ProductsList() {
             title="تصویر"
             width={100}
             render={(value: string) => (
-              <Image width={60} height={60} src={value} style={{ objectFit: "cover" }} />
+              <Image width={60} height={60} src={value} alt="" style={{ objectFit: "cover" }} />
             )}
           />
           <Table.Column dataIndex="name" title="نام محصول" />

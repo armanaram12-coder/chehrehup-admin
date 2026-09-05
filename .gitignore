@@ -1,77 +1,27 @@
-```typescript
+```
+# Next.js build output
+.next/
+
+# Environment variables
+.env*
+!.env.example
+
+# Logs
+*.log
+
 # Dependencies
 node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
 
 # Build outputs
 dist/
 build/
 target/
-
-# Python artifacts
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-*.so
-*.egg-info/
-.eggs/
-
-# Virtual environments
-venv/
-.venv/
-env/
-.ENV/
-
-# Logs
-*.log
-
-# OS generated files
-.DS_Store
-Thumbs.db
-
-# Environment variables
-.env
-.env.local
-.env.*
-
-# IDE specific
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Testing
-.coverage
-htmlcov/
-.coverage.*
-.cache/
-.pytest_cache/
-.mypy_cache/
-
-# Distribution / packaging
-*.tar.gz
-*.whl
-*.egg
-
-# Node.js
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# TypeScript/JavaScript build output
-*.tsbuildinfo
-out/
-lib/
-
-# Temporary files
-*.tmp
-*.temp
-```
-
-Wait, let me reconsider this. The only modified file is a TypeScript constants file, which suggests this is likely a JavaScript/TypeScript project, but there are no build artifacts, dependency directories, or temporary files in the changes. The file changes only show a source code modification.
-
-Since the changes only include source files (`.ts` file) and no build artifacts, dependencies, or temp files, I should output an empty .gitignore.
-
-```typescript
-
 ```
