@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import React, { Suspense } from "react";
 import { Refine } from "@refinedev/core";
 import { DevtoolsProvider } from "@/providers/devtools";
-import { useNotificationProvider } from "@refinedev/antd";
+import { useNotificationProvider, ThemedLayout } from "@refinedev/antd";
 import routerProvider from "@refinedev/nextjs-router";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "@refinedev/antd/dist/reset.css";
@@ -12,6 +12,7 @@ import { dataProvider } from "@/providers/data-provider";
 import { ColorModeContextProvider } from "@/contexts/color-mode";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import { UserOutlined, ShoppingCartOutlined, ProductOutlined, MessageOutlined, MailOutlined } from "@ant-design/icons";
+import { Header } from "@/components/header";
 
 export const metadata: Metadata = {
   title: "پنل مدیریت چهره آپ",
@@ -79,7 +80,9 @@ export default async function RootLayout({
                     }}
                   >
                     <RefineKbar />
-                    {children}
+                    <ThemedLayout Header={() => <Header />}>
+                      {children}
+                    </ThemedLayout>
                   </Refine>
                 </DevtoolsProvider>
               </Suspense>
