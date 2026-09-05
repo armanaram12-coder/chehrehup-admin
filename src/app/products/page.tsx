@@ -35,8 +35,9 @@ export default function ProductsList() {
             } else {
               setFilters([]);
             }
-            if (tableProps.pagination?.current && tableProps.pagination.current !== 1) {
-              tableProps.onChange?.({ current: 1, pageSize: tableProps.pagination.pageSize }, {}, {}, {});
+            const pagination = tableProps.pagination;
+            if (pagination && typeof pagination === 'object' && pagination.current && pagination.current !== 1) {
+              tableProps.onChange?.({ current: 1, pageSize: pagination.pageSize }, {}, {}, {});
             }
           }}
         />
