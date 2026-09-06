@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import React, { Suspense } from "react";
 import { Refine } from "@refinedev/core";
 import { DevtoolsProvider } from "@/providers/devtools";
-import { useNotificationProvider } from "@refinedev/antd";
+import { useNotificationProvider, ThemedLayoutV2 } from "@refinedev/antd";
 import routerProvider from "@refinedev/nextjs-router";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "@refinedev/antd/dist/reset.css";
@@ -43,7 +43,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                     options={{ syncWithLocation: true, warnWhenUnsavedChanges: true }}
                   >
                     <RefineKbar />
-                    {children}
+                    <ThemedLayoutV2>
+                      {children}
+                    </ThemedLayoutV2>
                   </Refine>
                 </DevtoolsProvider>
               </Suspense>
