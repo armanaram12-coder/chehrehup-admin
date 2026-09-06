@@ -3,21 +3,20 @@ import { authProviderServer } from "@/providers/auth-provider/auth-provider.serv
 import { redirect } from "next/navigation";
 
 export default async function Login() {
-  const data = await getData();
+  let authenticated = false;
+  let redirectTo = "/";
 
-  if (data.authenticated) {
-    redirect(data?.redirectTo || "/");
+  try {
+    const data = await authProviderServer.check();
+    authenticated = data.authenticated;
+    redirectTo = data.redirectTo || "/";
+  } catch (error) {
+    // اگر ارور داد، فرض کن لاگین نکرده
+  }
+
+  if (authenticated) {
+    redirect(redirectTo);
   }
 
   return <AuthPage type="login" />;
-}
-
-async function getData() {
-  const { authenticated, redirectTo, error } = await authProviderServer.check();
-
-  return {
-    authenticated,
-    redirectTo,
-    error,
-  };
 }
