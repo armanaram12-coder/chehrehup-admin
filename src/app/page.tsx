@@ -18,7 +18,6 @@ export default function HomePage() {
           در حال انتقال به صفحه ورود...
         </div>
       }
-      onRedirect={(url) => router.push(url || "/login")}
     >
       <div className="flex items-center justify-center min-h-screen">
         <h1 className="text-2xl font-bold">خوش آمدید</h1>
