@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import React, { Suspense } from "react";
 import { Refine } from "@refinedev/core";
 import { DevtoolsProvider } from "@/providers/devtools";
-import { useNotificationProvider, ThemedLayout } from "@refinedev/antd";
+import { useNotificationProvider } from "@refinedev/antd";
 import routerProvider from "@refinedev/nextjs-router";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "@refinedev/antd/dist/reset.css";
@@ -11,21 +11,11 @@ import { authProviderClient } from "@/providers/auth-provider/auth-provider.clie
 import { dataProvider } from "@/providers/data-provider";
 import { ColorModeContextProvider } from "@/contexts/color-mode";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
-import { UserOutlined, ShoppingCartOutlined, ProductOutlined, MessageOutlined, MailOutlined } from "@ant-design/icons";
-import { Header } from "@/components/header";
+import { ProductOutlined, ShoppingCartOutlined, MessageOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
 
-export const metadata: Metadata = {
-  title: "پنل مدیریت چهره آپ",
-  description: "پنل مدیریت فروشگاه چهره آپ",
-};
+export const metadata: Metadata = { title: "پنل مدیریت چهره آپ", description: "پنل مدیریت فروشگاه چهره آپ" };
 
-// ۱. تابع رو async کردیم
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  // ۲. قبل از cookies کلمه await رو اضافه کردیم
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies();
   const theme = cookieStore.get("theme");
   const defaultMode = theme?.value === "dark" ? "dark" : "light";
@@ -44,45 +34,16 @@ export default async function RootLayout({
                     authProvider={authProviderClient}
                     notificationProvider={useNotificationProvider}
                     resources={[
-                      {
-                        name: "products",
-                        list: "/products",
-                        create: "/products/create",
-                        edit: "/products/edit/:id",
-                        meta: { label: "محصولات", icon: <ProductOutlined /> },
-                      },
-                      {
-                        name: "orders",
-                        list: "/orders",
-                        edit: "/orders/edit/:id",
-                        meta: { label: "سفارشات", icon: <ShoppingCartOutlined /> },
-                      },
-                      {
-                        name: "support_messages",
-                        list: "/support_messages",
-                        edit: "/support_messages/edit/:id",
-                        meta: { label: "تیکت‌ها", icon: <MessageOutlined /> },
-                      },
-                      {
-                        name: "newsletter_subscribers",
-                        list: "/newsletter",
-                        meta: { label: "خبرنامه", icon: <MailOutlined /> },
-                      },
-                      {
-                        name: "user_profiles",
-                        list: "/user_profiles",
-                        meta: { label: "پروفایل کاربران", icon: <UserOutlined /> },
-                      },
+                      { name: "products", list: "/products", create: "/products/create", edit: "/products/edit/:id", meta: { label: "محصولات", icon: <ProductOutlined /> } },
+                      { name: "orders", list: "/orders", edit: "/orders/edit/:id", meta: { label: "سفارشات", icon: <ShoppingCartOutlined /> } },
+                      { name: "support_messages", list: "/support_messages", edit: "/support_messages/edit/:id", meta: { label: "تیکت‌ها", icon: <MessageOutlined /> } },
+                      { name: "newsletter_subscribers", list: "/newsletter", meta: { label: "خبرنامه", icon: <MailOutlined /> } },
+                      { name: "user_profiles", list: "/user_profiles", meta: { label: "کاربران", icon: <UserOutlined /> } },
                     ]}
-                    options={{
-                      syncWithLocation: true,
-                      warnWhenUnsavedChanges: true,
-                    }}
+                    options={{ syncWithLocation: true, warnWhenUnsavedChanges: true }}
                   >
                     <RefineKbar />
-                    <ThemedLayout Header={() => <Header />}>
-                      {children}
-                    </ThemedLayout>
+                    {children}
                   </Refine>
                 </DevtoolsProvider>
               </Suspense>
