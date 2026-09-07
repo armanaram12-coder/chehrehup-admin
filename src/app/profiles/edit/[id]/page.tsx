@@ -5,7 +5,7 @@ import { Authenticated } from "@refinedev/core";
 
 export default function ProfileEdit() {
   return (
-    <Authenticated>
+    <Authenticated key="profile-edit">
       <Edit title="ویرایش کاربر">
         <Form layout="vertical">
           <Form.Item label="نام کاربری" name="username">
