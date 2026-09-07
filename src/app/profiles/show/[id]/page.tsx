@@ -1,55 +1,45 @@
 "use client";
-import { Show, useShow } from "@refinedev/antd";
-import { Typography, Tag } from "antd";
+import { Edit, useForm } from "@refinedev/antd";
+import { Form, Input, Select, message } from "antd";
 import { Authenticated } from "@refinedev/core";
 
-const { Title, Text } = Typography;
-
-export default function ProfileShow() {
-  const { queryResult } = useShow({
+export default function ProfileEdit() {
+  const { formProps, saveButtonProps } = useForm({
     resource: "profiles",
+    redirect: "list",
+    onMutationSuccess: () => {
+      message.success("کاربر با موفقیت ویرایش شد");
+    },
   });
-  const { data, isLoading } = queryResult;
-  const record = data?.data;
-
-  if (isLoading) {
-    return <div className="flex items-center justify-center min-h-screen">در حال بارگذاری...</div>;
-  }
 
   return (
-    <Authenticated key="profile-show">
-      <Show title="جزئیات کاربر">
-        <div className="space-y-4">
-          <div>
-            <Text strong>ID:</Text>
-            <Text className="mr-2">{record?.id}</Text>
-          </div>
-          <div>
-            <Text strong>نام کاربری:</Text>
-            <Text className="mr-2">{record?.username}</Text>
-          </div>
-          <div>
-            <Text strong>تلفن:</Text>
-            <Text className="mr-2">{record?.phone || "-"}</Text>
-          </div>
-          <div>
-            <Text strong>آدرس:</Text>
-            <Text className="mr-2">{record?.address || "-"}</Text>
-          </div>
-          <div>
-            <Text strong>نقش:</Text>
-            <Tag color={record?.role === "admin" ? "red" : "blue"} className="mr-2">
-              {record?.role || "user"}
-            </Tag>
-          </div>
-          <div>
-            <Text strong>تاریخ ثبت‌نام:</Text>
-            <Text className="mr-2">
-              {record?.created_at ? new Date(record.created_at).toLocaleDateString("fa-IR") : "-"}
-            </Text>
-          </div>
-        </div>
-      </Show>
+    <Authenticated key="profile-edit">
+      <Edit 
+        title="ویرایش کاربر"
+        saveButtonProps={saveButtonProps}
+      >
+        <Form {...formProps} layout="vertical">
+          <Form.Item 
+            label="نام کاربری" 
+            name="username"
+            rules={[{ required: true, message: "لطفاً نام کاربری را وارد کنید" }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item label="تلفن" name="phone">
+            <Input />
+          </Form.Item>
+          <Form.Item label="آدرس" name="address">
+            <Input.TextArea rows={4} />
+          </Form.Item>
+          <Form.Item label="نقش" name="role">
+            <Select>
+              <Select.Option value="user">user</Select.Option>
+              <Select.Option value="admin">admin</Select.Option>
+            </Select>
+          </Form.Item>
+        </Form>
+      </Edit>
     </Authenticated>
   );
 }
