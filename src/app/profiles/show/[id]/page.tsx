@@ -1,5 +1,6 @@
 "use client";
-import { Show, useShow } from "@refinedev/antd";
+import { Show } from "@refinedev/antd";
+import { useShow } from "@refinedev/core";
 import { Typography, Tag } from "antd";
 import { Authenticated } from "@refinedev/core";
 
