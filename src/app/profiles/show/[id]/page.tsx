@@ -4,13 +4,12 @@ import { useShow } from "@refinedev/core";
 import { Typography, Tag } from "antd";
 import { Authenticated } from "@refinedev/core";
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 export default function ProfileShow() {
-  const { queryResult } = useShow({
+  const { data, isLoading } = useShow({
     resource: "profiles",
   });
-  const { data, isLoading } = queryResult;
   const record = data?.data;
 
   if (isLoading) {
