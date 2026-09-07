@@ -1,18 +1,32 @@
 "use client";
-import { Edit, useSelect } from "@refinedev/antd";
-import { Form, Input, Select } from "antd";
-import { Authenticated } from "@refinedev/core";
+import { Edit, useForm } from "@refinedev/antd";
+import { Form, Input, Select, message } from "antd";
+import { Authenticated, useNavigation } from "@refinedev/core";
 
 export default function ProfileEdit() {
-  const { selectProps } = useSelect({
+  const { formProps, saveButtonProps } = useForm({
     resource: "profiles",
+    redirect: false,
+    onMutationSuccess: () => {
+      message.success("کاربر با موفقیت ویرایش شد");
+    },
   });
+
+  const { list } = useNavigation();
 
   return (
     <Authenticated key="profile-edit">
-      <Edit title="ویرایش کاربر">
-        <Form layout="vertical">
-          <Form.Item label="نام کاربری" name="username">
+      <Edit 
+        title="ویرایش کاربر"
+        saveButtonProps={saveButtonProps}
+        goBack={() => list("profiles")}
+      >
+        <Form {...formProps} layout="vertical">
+          <Form.Item 
+            label="نام کاربری" 
+            name="username"
+            rules={[{ required: true, message: "لطفاً نام کاربری را وارد کنید" }]}
+          >
             <Input />
           </Form.Item>
           <Form.Item label="تلفن" name="phone">
