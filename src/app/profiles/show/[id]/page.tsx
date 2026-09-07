@@ -7,10 +7,9 @@ import { Authenticated } from "@refinedev/core";
 const { Text } = Typography;
 
 export default function ProfileShow() {
-  const { data, isLoading } = useShow({
+  const { data: record, isLoading } = useShow({
     resource: "profiles",
   });
-  const record = data?.data;
 
   if (isLoading) {
     return <div className="flex items-center justify-center min-h-screen">در حال بارگذاری...</div>;
