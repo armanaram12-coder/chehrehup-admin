@@ -38,7 +38,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                       { name: "orders", list: "/orders", edit: "/orders/edit/:id", meta: { label: "سفارشات", icon: <ShoppingCartOutlined /> } },
                       { name: "support_messages", list: "/support_messages", edit: "/support_messages/edit/:id", meta: { label: "تیکت‌ها", icon: <MessageOutlined /> } },
                       { name: "newsletter_subscribers", list: "/newsletter", meta: { label: "خبرنامه", icon: <MailOutlined /> } },
-                      { name: "user_profiles", list: "/user_profiles", meta: { label: "کاربران", icon: <UserOutlined /> } },
+                      { name: "profiles", list: "/profiles", meta: { label: "کاربران", icon: <UserOutlined /> } },
                     ]}
                     options={{ syncWithLocation: true, warnWhenUnsavedChanges: true }}
                   >
