@@ -1,13 +1,21 @@
 "use client";
-import { Edit } from "@refinedev/antd";
+import { Edit, useForm } from "@refinedev/antd";
 import { Form, Input, Select } from "antd";
 import { Authenticated } from "@refinedev/core";
 
 export default function ProfileEdit() {
+  const { formProps, saveButtonProps } = useForm({
+    resource: "profiles",
+    redirect: "list",
+  });
+
   return (
     <Authenticated key="profile-edit">
-      <Edit title="ویرایش کاربر">
-        <Form layout="vertical">
+      <Edit 
+        title="ویرایش کاربر"
+        saveButtonProps={saveButtonProps}
+      >
+        <Form {...formProps} layout="vertical">
           <Form.Item label="نام کاربری" name="username">
             <Input />
           </Form.Item>
