@@ -9,13 +9,12 @@ const { Text } = Typography;
 
 export default function ProfileShow() {
   const { id } = useParams();
-  const { data, isLoading } = useOne({
+  const { result: record, query } = useOne({
     resource: "profiles",
     id: id as string,
   });
-  const record = data?.data;
 
-  if (isLoading) {
+  if (query?.isLoading) {
     return <div className="flex items-center justify-center min-h-screen">در حال بارگذاری...</div>;
   }
 
